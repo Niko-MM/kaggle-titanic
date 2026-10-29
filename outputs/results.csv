@@ -1,0 +1,22 @@
+
+baseline_numeric,LogisticRegression,Pclass + SibSp + Parch + Fare + FamilySize,0.6824,0.0178,42
+baseline_numeric_with_categories,LogisticRegression,Pclass + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8204,0.007,42
+baseline_numeric_with_categories_age,LogisticRegression,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8283,0.0092,42
+decision_tree_baseline,DecisionTreeClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8047,0.0164,42
+decision_tree_depth_5,DecisionTreeClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8227,0.0184,42
+decision_tree_depth_3,DecisionTreeClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8238,0.0166,42
+random_forest_depth_3,RandomForestClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8215,0.0114,42
+random_forest_depth_7,RandomForestClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8384,0.0139,42
+KNeighborsClassifier_n5,Pipeline,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8171,0.0177,42
+knn_w_distance,Pipeline,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.7957,0.0188,42
+catboost_depth_3,CatBoostClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8316,0.0081,42
+catboost_depth_5,CatBoostClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8305,0.0084,42
+xgboost_depth_3,XGBClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.835,0.0205,42
+mlp_16_8,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.7879,0.0175,42
+mlp_16_8_ep100,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8058,0.0127,42
+mlp_16_8_ep200,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8272,0.014,42mlp_16_8_ep300_lr_0.0001,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.7721,0.0339,42
+mlp_16_8_ep250_lr_0.001,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.817,0.0163,42
+mlp_16_8_ep250_lr_0.0003,ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8182,0.0094,42
+mlp_16_8_ep200_lr_0.001_Standart(),ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8227,0.0114,42
+mlp_16_ep200_lr_0.001_Standart(),ModelEngine,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.8215,0.0076,42
+ensemble,VotingClassifier,Pclass + Age + SibSp + Parch + Fare + FamilySize + Sex_male + Embarked_Q + Embarked_S + Title_Miss + Title_Mr + Title_Mrs + Title_Rare,0.844,0.0042,42

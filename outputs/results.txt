@@ -1,0 +1,62 @@
+baseline_numeric | LogisticRegression | среднее 0.6824 | разброс 0.0178 | seed 42 | f: Pclass, SibSp, Parch, Fare, FamilySize
+
+# добавил категориальные фичи ["Sex", "Embarked", "Title"], прирост 0. 138, так же разброс среднего -0. 0108
+baseline_numeric_with_categories | LogisticRegression | среднее 0.8204 | разброс 0.0070 | seed 42 | f: Pclass, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# добавил "Age", средний +0.0079, разброс +0.0022
+baseline_numeric_with_categories_age | LogisticRegression | среднее 0.8283 | разброс 0.0092 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# добавил одиночное дерево без глубины, средний -0,0236, разброс +0,0072
+decision_tree_baseline | DecisionTreeClassifier | среднее 0.8047 | разброс 0.0164 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# добавил глубину 5, средний +0,018, разброс +0,002
+decision_tree_depth_5 | DecisionTreeClassifier | среднее 0.8227 | разброс 0.0184 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# глубина 3 против 5: средний +0.0011, разброс −0.0018.
+decision_tree_depth_3 | DecisionTreeClassifier | среднее 0.8238 | разброс 0.0166 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Случайный лес (n_estimators=100, max_depth=3), средний -0,0023, разброс -0,0052
+random_forest_depth_3 | RandomForestClassifier | среднее 0.8215 | разброс 0.0114 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# добавил глубину (n_estimators=100, max_depth=7), средний +0,0169, разброс +0,0025
+random_forest_depth_7 | RandomForestClassifier | среднее 0.8384 | разброс 0.0139 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# knn классификатор (n_neighbors=5), средний -0,0213, разброс +0,0038
+KNeighborsClassifier_n5 | KNeighborsClassifier | среднее 0.8171 | разброс 0.0177 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# добавил аргумент (n_neighbors=5, weights="distance"), средний -0,0214, разброс +0,0011
+knn_w_distance | KNeighborsClassifier | среднее 0.7957 | разброс 0.0188 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# CatBoost(iterations=100, depth=3) сравниваю с лучшим лесом средний -0,0068, разброс -0,0058
+catboost_depth_3 | CatBoostClassifier | среднее 0.8316 | разброс 0.0081 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Добавил глубины 5, средний -0,0011, разброс +0,0003
+catboost_depth_5 | CatBoostClassifier | среднее 0.8305 | разброс 0.0084 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# xgb (iterations=100,max_depth=3),сравниваю с лучшим лесом,  средний -0,0034, разброс +0,0066
+xgboost_depth_3 | XGBClassifier | среднее 0.8350 | разброс 0.0205 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Нейронка ("lr": 0.001,"epochs": 50), сравнение с лучшим лесом средний -0,0505, разброс +0,0036
+mlp_16_8 | ModelEngine | среднее 0.7879 | разброс 0.0175 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Поднял до 100 эпох, средний +0,0179, разброс -0,0048
+# После 60 эпохи пошли скачки
+mlp_16_8_ep100 | ModelEngine | среднее 0.8058 | разброс 0.0127 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Поднял до 200 эпох, средний +0,0214, разброс +0,0013
+mlp_16_8_ep200 | ModelEngine | среднее 0.8272 | разброс 0.0140 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Поднял до 250 эпох, сердний -0,0102, разброс +0,0023
+mlp_16_8_ep250_lr_0.001 | ModelEngine | среднее 0.8170 | разброс 0.0163 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Уменьшил скорость до 0.0003, средний +0,0012, разброс -0,0069
+mlp_16_8_ep250_lr_0.0003 | ModelEngine | среднее 0.8182 | разброс 0.0094 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Добавил нормализацию ("lr": 0.001,"epochs": 200), средний +0,0045, разброс +0,002
+mlp_16_8_ep200_lr_0.001_Standart() | ModelEngine | среднее 0.8227 | разброс 0.0114 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+# Убрал внутренний слой средний -0,0012, разброс -0,0038
+mlp_16_ep200_lr_0.001_Standart() | ModelEngine | среднее 0.8215 | разброс 0.0076 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
+
+#!!! ансабль с лучшими параметрами. Сравниваю с лесом +0,0056, разброс -0,0097
+ensemble | VotingClassifier | среднее 0.8440 | разброс 0.0042 | seed 42 | f: Pclass, Age, SibSp, Parch, Fare, FamilySize, Sex_male, Embarked_Q, Embarked_S, Title_Miss, Title_Mr, Title_Mrs, Title_Rare
