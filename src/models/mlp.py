@@ -27,21 +27,21 @@ class ModelEngine(BaseEstimator):
     Интерфейс модели, адаптирован под pipeline sklearn
     """
 
-    def __init__(self, input_dim, lr, epochs, batch_size) -> None:
-        self.input_dim = input_dim
+    def __init__(self, lr, epochs, batch_size) -> None:
         self.lr = lr
         self.epochs = epochs
         self.batch_size = batch_size
 
-        self.model = TitanicModel(input_dim)
         self.criterion = nn.BCEWithLogitsLoss()
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
         self.loss_history = None
         self.scaler = StandardScaler()
 
     def fit(self, X, y):
         """Обучаем модель"""
         X_scaled = self.scaler.fit_transform(X)
+
+        self.model = TitanicModel(X_scaled.shape[1])
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
 
         X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
         y_tensor = torch.tensor(y.values, dtype=torch.float32).unsqueeze(1)
