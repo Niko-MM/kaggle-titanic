@@ -13,8 +13,9 @@ from src.validation import create_folds
 
 
 def run_cv_txt(df_train, features, cfg, model):
-    """Смотрим результаты модели по фолдам
-    Возарщаем среднюю точность и среднее отклонение
+    """
+    Считаем accuracy по фолдам и пишем журнал.
+      Возвращаем среднюю точность и разброс
     """
     # Делим датасет на фолды
     df_folded = create_folds(df_train, cfg)
@@ -22,7 +23,7 @@ def run_cv_txt(df_train, features, cfg, model):
     mean_accuracy, std_accuracy, model_name = run(df_folded, cfg, features, model=model)
     # Пишем логи cv, txt
     log_experiment(
-        experiment_name="ensemble_shared_fill",
+        experiment_name=cfg.general.experiment_name,
         model_name=model_name,
         features=features,
         mean_accuracy=mean_accuracy,
@@ -33,12 +34,8 @@ def run_cv_txt(df_train, features, cfg, model):
 
 
 def prepare(train, test, cfg):
-    """Одна кухня для экзамена и для файла ответа.
+    """Подготовка данных"""
 
-    Возвращает готовую тренировку, готовый тест, номера пассажиров теста
-    и список колонок, которые видит модель.
-    """
-    # В build_features id удаляем
     test_ids = test[cfg.columns.id].copy()
     # Создаем фичи и удаляем не нужные
     df_train = build_features(train, cfg)
@@ -57,10 +54,9 @@ def prepare(train, test, cfg):
 
 
 def write_submission(df_train, df_test, test_ids, features, cfg, model):
-    """Один fit на всех 891 строках и файл для Kaggle. Журнал не трогаем"""
+    """Один fit на всех строках и файл для Kaggle"""
     # Обучаем модель на тренировочном сете
     model.fit(df_train[features], df_train[cfg.columns.target])
-    # Получаем предсказание на тестовом сете
     predictions = model.predict(df_test)
 
     submission = pd.DataFrame(
@@ -69,9 +65,7 @@ def write_submission(df_train, df_test, test_ids, features, cfg, model):
             cfg.columns.target: predictions.astype(int),
         }
     )
-    # Путь до submission.csv
     output_path = Path(__file__).parent / "outputs" / "submission.csv"
-    # Пишем результаты
     submission.to_csv(output_path, index=False)
     print(f"Файл ответа: {output_path}, строк: {len(submission)}")
     return output_path
@@ -83,7 +77,7 @@ if __name__ == "__main__":
     model = ensemble(config)
 
     # Прогоняем модель, пишем логи csv, txt
-    run_cv_txt(df_train, features, config, model)
+    # run_cv_txt(df_train, features, config, model)
 
-    # Пишем submission.csv. На фолдах учились копии, эта модель ещё пустая
+    # Пишем submission.csv
     write_submission(df_train, df_test, test_ids, features, config, model)

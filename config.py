@@ -6,7 +6,7 @@ ROOT = Path(__file__).parent
 
 config = {
     "general": {
-        "experiment_name": "baseline",
+        "experiment_name": "ensemble",
         "seed": 42,
     },
     "paths": {

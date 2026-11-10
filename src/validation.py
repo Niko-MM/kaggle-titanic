@@ -3,7 +3,7 @@ from sklearn.model_selection import StratifiedKFold
 
 
 def create_folds(df: pd.DataFrame, cfg):
-    """Нарезаем фолды"""
+    """Нарезаем фолды. Количество и seed в конфиге"""
     df = df.copy()
 
     df["kfold"] = -1

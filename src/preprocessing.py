@@ -1,10 +1,9 @@
 import pandas as pd
 
 
-def _apply_median_card(df, card, column, keys, fallback):
-    """Прикладываем карточку медиан (Собранная по тренировочному сету)
-      и заполняем пропуски ею.
-    Если медиана карточки не нашлась, берем среднее по фиче
+def apply_median_card(df, card, column, keys, fallback):
+    """Прикладываем карточку медиан, собранную по трейну.
+    Если группы в карточке нет, берём медиану по всей колонке трейна.
     """
     # Создаем название колонки для маски
     median_column = f"{column}_median"
@@ -16,15 +15,11 @@ def _apply_median_card(df, card, column, keys, fallback):
 
 
 def fill_train_and_test(train: pd.DataFrame, test: pd.DataFrame):
-    """Заполняем пропуски в train и test
-
-    Медианы считаются только по train и ими же закрываются дыры  в test.
-    Вызывать после build_features: нужны Title, Sex, Pclass, Embarked, Age, Fare.
-    """
+    """Закрытие пропусков"""
     train = train.copy()
     test = test.copy()
 
-    # Порт заполняем константой. В анализе всего два пропуск
+    # Порт заполняем константой. В анализе всего два пропуска
     train["Embarked"] = train["Embarked"].fillna("S")
     test["Embarked"] = test["Embarked"].fillna("S")
 
@@ -49,10 +44,10 @@ def fill_train_and_test(train: pd.DataFrame, test: pd.DataFrame):
     age_keys = ["Title", "Pclass", "Sex"]
     fare_keys = ["Pclass", "Embarked"]
 
-    train = _apply_median_card(train, age_card, "Age", age_keys, age_fallback)
-    test = _apply_median_card(test, age_card, "Age", age_keys, age_fallback)
-    train = _apply_median_card(train, fare_card, "Fare", fare_keys, fare_fallback)
-    test = _apply_median_card(test, fare_card, "Fare", fare_keys, fare_fallback)
+    train = apply_median_card(train, age_card, "Age", age_keys, age_fallback)
+    test = apply_median_card(test, age_card, "Age", age_keys, age_fallback)
+    train = apply_median_card(train, fare_card, "Fare", fare_keys, fare_fallback)
+    test = apply_median_card(test, fare_card, "Fare", fare_keys, fare_fallback)
 
     return train, test
 

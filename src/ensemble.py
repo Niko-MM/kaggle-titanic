@@ -4,9 +4,7 @@ from xgboost import XGBClassifier
 
 
 def ensemble(cfg):
-    """Собираем 1 случайный лес и 2 бустинга.
-    кладем в конструктор
-    """
+    """Случайный лес и 2 бустинга"""
     # Беру лучшие параметры леса, строка 22
     forest = RandomForestClassifier(
         n_estimators=100, max_depth=7, random_state=cfg.general.seed
@@ -24,7 +22,6 @@ def ensemble(cfg):
     # Лучшие параметры, строка 37
     xgb = XGBClassifier(n_estimators=100, max_depth=3, random_state=cfg.general.seed)
 
-    # Собираем ансабль
     committee = VotingClassifier(
         estimators=[("catboost", catboost), ("forest", forest), ("xgb", xgb)],  # type: ignore
         voting="soft",
